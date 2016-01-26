@@ -5,6 +5,7 @@
 #include <unistd.h>
 
 #include <sys/types.h>
+#include <sys/wait.h>
 #include <signal.h>
 #include <sys/socket.h>
 #include <netinet/in.h>
@@ -175,10 +176,11 @@ int main() {
 		int tutee_ind = num_tutees-1;
 		int tutor_ind = find_tutor_simp(tutee_ind);
 		if (tutor_ind != -1) {
+			int status;
 			printf("<server> paired tutor #%d and tutee #%d\n", tutor_ind, tutee_ind);
 			tutors[tutor_ind][1] = 1;  // set tutor to unavailable
 			int pid = fork();  // subserver 
-    		if (pid == 0){
+    		if (pid == 0) {
 				char msg[] = "You have been connected to a tutor.";
 				write(tutees[tutee_ind][0], msg, sizeof(msg));
 				int run = 1;	
@@ -189,9 +191,11 @@ int main() {
 					}
 					relay_msg(tutors[tutor_ind][0], tutees[tutee_ind][0]);
 				}
+			} else {
+				waitpid(pid, &status, 0);  // wait for chat to finish
+				printf("<server> closing chat between tutor #%d and tutee #%d\n", tutor_ind, tutee_ind);
+				close_chat(tutor_ind, tutee_ind);
 			}
-//			printf("<server> closing chat between tutor #%d and tutee #%d\n", tutor_ind, tutee_ind);
-//			close_chat(tutor_ind, tutee_ind);
 		}
 	} else {
 		// shift array down, adjust
