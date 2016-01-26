@@ -90,9 +90,15 @@ int main(int argc, char **argv) {
     printf("You: ");
     fgets(s, sizeof(s), stdin);
 	if (strcmp(s, "exit\n") == 0) {
-		printf("Goodbye\n");
-		close(socket_id);
-		exit(0);
+		if (type == TUTEE_ID) {
+			printf("Goodbye\n");
+			close(socket_id);
+			exit(0);
+		} else {
+			printf("Please wait for the tutee to exit!\n");
+			printf("You: ");
+		    fgets(s, sizeof(s), stdin);
+		}
 	}
     write(socket_id, s, sizeof(s));
 
