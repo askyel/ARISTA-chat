@@ -89,6 +89,11 @@ int main(int argc, char **argv) {
     printf("<client> received: %s\n", s);
     printf("Enter text to write:\n");
     fgets(s, sizeof(s), stdin);
+	if (strcmp(s, "exit\n") == 0) {
+		printf("Goodbye\n");
+		close(socket_id);
+		exit(0);
+	}
     write(socket_id, s, sizeof(s));
 
   }

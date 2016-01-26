@@ -181,15 +181,17 @@ int main() {
     		if (pid == 0){
 				char msg[] = "You have been connected to a tutor.";
 				write(tutees[tutee_ind][0], msg, sizeof(msg));
-				
-				while(1) {
-					relay_msg(tutees[tutee_ind][0], tutors[tutor_ind][0]);
+				int run = 1;	
+				while(run) {
+					int e = relay_msg(tutees[tutee_ind][0], tutors[tutor_ind][0]);
+					if (e == -1) {
+						run = 0;
+					}
 					relay_msg(tutors[tutor_ind][0], tutees[tutee_ind][0]);
-					// relay tutee -> tutor
-					// if relay is -1, close chat
-					// relay tutor -> tutee
 				}
 			}
+			printf("<server> closing chat between tutor #%d and tutee #%d\n", tutor_ind, tutee_ind);
+			close_chat(tutor_ind, tutee_ind);
 		}
 	} else {
 		// shift array down, adjust
