@@ -169,7 +169,7 @@ int main() {
 	else {
 		printf("ERROR - type argument\n");
 	}
-	
+	if (type == TUTEE_ID) {	
 	int pid = fork();  // subserver 
     if (pid == 0){
 		if (type == TUTEE_ID) {   
@@ -208,6 +208,7 @@ int main() {
 		// shift array down, adjust
         // close(socket_client);
     }
+	}
   }
 
   return 0;
