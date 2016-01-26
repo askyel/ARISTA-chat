@@ -29,7 +29,7 @@ int connect_server(char *hostname) {
 	struct in_addr *addr;
 	struct hostent *h = (void *)123456789;
 	h = gethostbyname(hostname);
-	printf("%s\n", hostname);
+//	printf("%s\n", hostname);
 	if (h == NULL) {
 		printf("ERROR - cannot find hostname.\n");
 		//127.0.0.1 is the "loopback" address of any machine
@@ -84,7 +84,7 @@ int main(int argc, char **argv) {
   while(socket_id >= 0){
 
     //printf("<client> waiting\n");
-    char s[100];
+    char s[MSG_SIZE];
     sleep(1);
     read(socket_id, s, sizeof(s));
     //printf("<client> received: %s\n", s);
