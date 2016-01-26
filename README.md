@@ -1,1 +1,2 @@
-# ARISTA-chat
+ARISTA chat
+aka coolest project
