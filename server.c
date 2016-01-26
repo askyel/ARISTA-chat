@@ -181,7 +181,7 @@ int main() {
 			tutors[tutor_ind][1] = 1;  // set tutor to unavailable
 			int pid = fork();  // subserver 
     		if (pid == 0) {
-				char msg[] = "You have been connected to a tutor.";
+				char msg[] = "You have been connected!\n";
 				write(tutees[tutee_ind][0], msg, sizeof(msg));
 				int run = 1;	
 				while(run) {
