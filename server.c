@@ -201,6 +201,11 @@ int main() {
 			}
 			*/
 		}
+		else {
+			char msg[] = "No tutors available at this time. Please come back later!\n";
+			write(tutees[tutee_ind][0], msg, sizeof(msg));
+			close(tutees[tutee_ind][0]);
+		}
 	} else {
 		// shift array down, adjust
         // close(socket_client);
