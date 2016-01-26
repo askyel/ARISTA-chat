@@ -190,8 +190,8 @@ int main() {
 					relay_msg(tutors[tutor_ind][0], tutees[tutee_ind][0]);
 				}
 			}
-			printf("<server> closing chat between tutor #%d and tutee #%d\n", tutor_ind, tutee_ind);
-			close_chat(tutor_ind, tutee_ind);
+//			printf("<server> closing chat between tutor #%d and tutee #%d\n", tutor_ind, tutee_ind);
+//			close_chat(tutor_ind, tutee_ind);
 		}
 	} else {
 		// shift array down, adjust
