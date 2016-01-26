@@ -191,11 +191,14 @@ int main() {
 					}
 					relay_msg(tutors[tutor_ind][0], tutees[tutee_ind][0]);
 				}
-			} else {
+			}
+			/**
+		   	else {
 				waitpid(pid, &status, 0);  // wait for chat to finish
 				printf("<server> closing chat between tutor #%d and tutee #%d\n", tutor_ind, tutee_ind);
 				close_chat(tutor_ind, tutee_ind);
 			}
+			*/
 		}
 	} else {
 		// shift array down, adjust
