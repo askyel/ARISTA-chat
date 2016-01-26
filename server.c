@@ -134,9 +134,9 @@ int main() {
 	sleep(2);
   	printf("<server> connected: %d\n", socket_client );
 	
+	/* add client to corresponding array */
 	int type;  // get type from client
 	read(socket_client, &type, sizeof(type));
-//	printf("type - %d\n", type);
 	if (type == TUTOR_ID) {
 		if (num_tutors < MAX_CLIENTS) {
 			tutors[num_tutors][0] = socket_client;
@@ -169,17 +169,18 @@ int main() {
 	else {
 		printf("ERROR - type argument\n");
 	}
+
+	/* start chat from tutee side */
 	if (type == TUTEE_ID) {	
-	int pid = fork();  // subserver 
-    if (pid == 0){
-		if (type == TUTEE_ID) {   
-			int tutee_ind = num_tutees-1;
-			int tutor_ind = find_tutor_simp(tutee_ind);
-			if (tutor_ind != -1) {
+		int tutee_ind = num_tutees-1;
+		int tutor_ind = find_tutor_simp(tutee_ind);
+		if (tutor_ind != -1) {
+			tutors[tutor_ind][1] = 1;  // set tutor to unavailable
+			int pid = fork();  // subserver 
+    		if (pid == 0){
 				char msg[] = "You have been connected to a tutor.";
 				write(tutees[tutee_ind][0], msg, sizeof(msg));
-				tutors[tutor_ind][1] = 1;  // set tutor to unavailable
-
+				
 				while(1) {
 					relay_msg(tutees[tutee_ind][0], tutors[tutor_ind][0]);
 					relay_msg(tutors[tutor_ind][0], tutees[tutee_ind][0]);
@@ -189,26 +190,10 @@ int main() {
 				}
 			}
 		}
-
-		/*
-		while(1) {  
-      		//system("gnome-terminal"); -> this is how to open a new window but u cant control it
-      		printf("Enter text to write:\n");
-     		char s[100];
-      		fgets(s, sizeof(s), stdin);
-      		write(socket_client, s, sizeof(s));
-      		printf("<server> waiting\n");
-      		sleep(2);
-      		read(socket_client, s, sizeof(s));
-      		printf("<server> received: %s\n", s);
-		}
-		**/
-
-    } else {
+	} else {
 		// shift array down, adjust
         // close(socket_client);
     }
-	}
   }
 
   return 0;
