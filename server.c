@@ -191,6 +191,7 @@ int main() {
 					}
 					relay_msg(tutors[tutor_ind][0], tutees[tutee_ind][0]);
 				}
+				close(0);
 			}
 			/**
 		   	else {
