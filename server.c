@@ -175,6 +175,7 @@ int main() {
 		int tutee_ind = num_tutees-1;
 		int tutor_ind = find_tutor_simp(tutee_ind);
 		if (tutor_ind != -1) {
+			printf("<server> paired tutor #%d and tutee #%d\n", tutor_ind, tutee_ind);
 			tutors[tutor_ind][1] = 1;  // set tutor to unavailable
 			int pid = fork();  // subserver 
     		if (pid == 0){
