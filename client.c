@@ -82,11 +82,15 @@ int main(int argc, char **argv) {
 
   while(socket_id >= 0){
 
-    printf("<client> waiting\n");
+    //printf("<client> waiting\n");
     char s[100];
     sleep(1);
     read(socket_id, s, sizeof(s));
-    printf("<client> received: %s\n", s);
+    //printf("<client> received: %s\n", s);
+	if (type == TUTEE_ID) 
+		printf("Tutor: %s", s);
+	else
+		printf("Tutee: %s", s);
     printf("You: ");
     fgets(s, sizeof(s), stdin);
 	if (strcmp(s, "exit\n") == 0) {
