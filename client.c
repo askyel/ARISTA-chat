@@ -87,7 +87,7 @@ int main(int argc, char **argv) {
     sleep(1);
     read(socket_id, s, sizeof(s));
     printf("<client> received: %s\n", s);
-    printf("Enter text to write:\n");
+    printf("You: ");
     fgets(s, sizeof(s), stdin);
 	if (strcmp(s, "exit\n") == 0) {
 		printf("Goodbye\n");
@@ -98,8 +98,5 @@ int main(int argc, char **argv) {
 
   }
 
-  // read( socket_id, buffer, sizeof(buffer));
-  //printf("<client> received: [%s]\n", buffer );
-  
   return 0;
 }
