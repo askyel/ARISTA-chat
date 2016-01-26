@@ -56,7 +56,7 @@ int create_server() {
 }
 
 int relay_msg(int client_from, int client_to) {
-	char msg[100];
+	char msg[MSG_SIZE];
 	sleep(1);
 	read(client_from, msg, sizeof(msg));
 	printf("<server> received [%d->]: %s", client_from, msg);
@@ -146,7 +146,7 @@ int main() {
 			printf("<server> added tutor: %d [%d tutors; %d tutees]\n", socket_client, num_tutors, num_tutees);
 		}
 		else {
-			char msg[100];
+			char msg[MSG_SIZE];
 			sprintf(msg, "XSorry, too many clients. Come back later.\n");
 			write(socket_client, msg, sizeof(msg));
 			close(socket_client);
@@ -161,7 +161,7 @@ int main() {
 			printf("<server> added tutee: %d [%d tutors; %d tutees]\n", socket_client, num_tutors, num_tutees);
 		}
 		else {
-			char msg[100];
+			char msg[MSG_SIZE];
 			sprintf(msg, "XSorry, too many clients. Come back later.\n");
 			write(socket_client, msg, sizeof(msg));
 			close(socket_client);
